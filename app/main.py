@@ -7,8 +7,8 @@ def create_app() -> FastAPI:
 
     origins = [
         "http://localhost",  # Front-end running on localhost
-        "http://localhost:3002",  # Front-end running on a different port
-        "http://127.0.0.1:3002",  # Another common localhost setup
+        "http://localhost:5173",  # Front-end running on a different port
+        "http://127.0.0.1:5173",  # Another common localhost setup
         # Add other origins if needed
     ]
 
