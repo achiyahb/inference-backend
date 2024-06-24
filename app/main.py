@@ -1,15 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routes.classifier import router as classifier_router
+from .config import settings
 
 def create_app() -> FastAPI:
     app = FastAPI(title="Classifier API", version="1.0")
 
     origins = [
         "http://localhost",  # Front-end running on localhost
-        "http://localhost:5173",  # Front-end running on a different port
-        "http://127.0.0.1:5173",  # Another common localhost setup
-        # Add other origins if needed
+        settings.inference_front_url,
     ]
 
     app.add_middleware(
