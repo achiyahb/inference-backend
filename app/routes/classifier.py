@@ -3,7 +3,7 @@ import shutil
 import os
 from ..models import ClassifierModel
 from ..schemas import PredictionResponse
-from app.routes.s3 import get_model_from_s3
+from app.routes.storage import get_model_from_cache_or_storage
 from io import BytesIO
 
 router = APIRouter()
@@ -18,7 +18,7 @@ async def classify(file: UploadFile = File(...), modelId: int = Form(...)) -> Pr
         with open(temp_file_path, "wb+") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
-        model_bytes = get_model_from_s3(modelId)
+        model_bytes = get_model_from_cache_or_storage(modelId)
         classifier_model = ClassifierModel(model_bytes)
 
         prediction = classifier_model.predict(temp_file_path)
