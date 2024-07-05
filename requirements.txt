@@ -3,4 +3,5 @@ uvicorn[standard]
 fastai
 pydantic
 pydantic_settings
+torch
 boto3
