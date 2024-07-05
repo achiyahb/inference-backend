@@ -2,4 +2,5 @@ fastapi
 uvicorn[standard]
 fastai
 pydantic
+pydantic_settings
 boto3
