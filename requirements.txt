@@ -3,5 +3,5 @@ uvicorn[standard]
 fastai
 pydantic
 pydantic_settings
-torch
 boto3
+torch @ https://download.pytorch.org/whl/nightly/cu111/torch_nightly.html
