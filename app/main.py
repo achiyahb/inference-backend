@@ -7,7 +7,8 @@ def create_app() -> FastAPI:
     app = FastAPI(title="Classifier API", version="1.0")
 
     origins = [
-        "http://localhost",  # Front-end running on localhost
+        "http://localhost", # Front-end running on localhost
+        "http://localhost:5174",
         settings.inference_front_url,
     ]
 

@@ -4,4 +4,4 @@ fastai
 pydantic
 pydantic_settings
 boto3
-torch @ https://download.pytorch.org/whl/nightly/cu111/torch_nightly.html
+torch --pre --extra-index-url https://download.pytorch.org/whl/nightly/cpu
