@@ -10,7 +10,7 @@ class ClassifierModel:
     def load_model_from_stream(model_stream: BytesIO):
         print('has_mps', has_mps)
         model_stream.seek(0)  # Ensure the stream is at the beginning
-        return load(model_stream, map_location=device('mps'))
+        return load(model_stream, map_location=device('cpu'))
 
     def predict(self, image_path: str) -> str:
         image = PILImage.create(image_path)
