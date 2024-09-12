@@ -1,6 +1,6 @@
 from fastai.vision.all import load_learner, PILImage
 from io import BytesIO
-from torch import device, load, has_mps
+from torch import device, load
 
 class ClassifierModel:
     def __init__(self, model_stream: BytesIO):
@@ -8,7 +8,7 @@ class ClassifierModel:
 
     @staticmethod
     def load_model_from_stream(model_stream: BytesIO):
-        print('has_mps', has_mps)
+      
         model_stream.seek(0)
         return load(model_stream, map_location=device('cpu'))
 
