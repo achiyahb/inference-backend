@@ -7,9 +7,10 @@ def create_app() -> FastAPI:
     app = FastAPI(title="Classifier API", version="1.0")
 
     origins = [
-        "http://localhost", # Front-end running on localhost
-        "http://localhost:5174",
+        "http://localhost",
+        "http://localhost:3000",
         settings.inference_front_url,
+        "https://trainers-front-six.vercel.app"
     ]
 
     app.add_middleware(
@@ -19,6 +20,10 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )   
+
+    @app.get("/health")
+    async def health_check():
+        return {"message": "API is working"}
 
     app.include_router(classifier_router)
     return app
