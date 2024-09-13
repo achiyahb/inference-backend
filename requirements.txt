@@ -5,3 +5,4 @@ pydantic
 pydantic_settings
 boto3
 python-multipart
+httpx
