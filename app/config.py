@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     host: str = Field(default="0.0.0.0", env='APP_HOST')
     inference_front_url: str = Field(..., env='INFERENCE_FRONTEND_URL')
     s3_bucket: str = Field(..., env='S3_BUCKET')
+    trainer_node_service_url: str = Field(..., env='TRAINER_NODE_SERVICE_URL')
+    jwt_token: str = Field(..., env='JWT_TOKEN')
 
     class Config:
         env_file = ".env"

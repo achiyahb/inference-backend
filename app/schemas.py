@@ -5,3 +5,7 @@ class PredictionRequest(BaseModel):
 
 class PredictionResponse(BaseModel):
     prediction: str
+
+class CarPredictionResponse(BaseModel):
+    prediction: str
+    direction: str
