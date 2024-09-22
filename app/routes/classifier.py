@@ -46,7 +46,9 @@ async def classify_car(request: CarPredictionRequest) -> CarPredictionResponse:
         with open(temp_file_path, "wb") as image_file:
             image_file.write(image_data)
         
-        modelData = await fetch_model_data(request.hmacHex)
+        hmac_hex_lower = request.hmacHex.lower()
+
+        modelData = await fetch_model_data(hmac_hex_lower)
         
         model_bytes = get_model_from_cache_or_storage(modelData.get('modelKey'), modelData.get('trainerId'))
         classifier_model = ClassifierModel(model_bytes)
