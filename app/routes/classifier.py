@@ -49,8 +49,15 @@ async def classify_car(request: CarPredictionRequest) -> CarPredictionResponse:
         hmac_hex_lower = request.hmacHex.lower()
 
         modelData = await fetch_model_data(hmac_hex_lower)
+
+        modelKey= modelData.get('modelKey')
+        trainerId= modelData.get('trainerId')
+
+        if modelKey is None or trainerId is None:
+            os.remove(temp_file_path)
+            raise HTTPException(status_code=400, detail="modelKey and trainerId must not be null.")
         
-        model_bytes = get_model_from_cache_or_storage(modelData.get('modelKey'), modelData.get('trainerId'))
+        model_bytes = get_model_from_cache_or_storage(modelKey, trainerId)
         classifier_model = ClassifierModel(model_bytes)
 
         prediction = classifier_model.predict(temp_file_path)
