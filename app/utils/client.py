@@ -22,3 +22,36 @@ async def fetch_model_data(hmacHex: str):
         print(f"HTTP error while fetching trainer data: {e}")
     except Exception as e:
         print(f"Error fetching trainer data: {e}")
+
+def send_inference_image(
+    file_path: str,
+    filename: str,
+    content_type: str,
+    trainerId: int,
+    modelKey: str,
+    prediction: str,
+    clientKey: str,
+    imageKey: str
+):
+    nest_url = f"{settings.trainer_node_service_url}/trainers/{trainerId}/images/inference"
+
+    data = {
+        "trainerId": str(trainerId),
+        "modelKey": modelKey,
+        "predictedCategoryName": prediction,
+        "clientKey": clientKey,
+        "imageKey": imageKey
+    }
+    headers = {
+        "Authorization": f"Bearer {settings.jwt_token}"
+    }
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            with open(file_path, "rb") as f:
+                files = {
+                    "image": (filename, f, content_type)
+                }
+                response = client.post(nest_url, data=data, files=files, headers=headers)
+                response.raise_for_status()
+    except Exception as e:
+        print(f"Failed to send image to Nest API: {e}")
