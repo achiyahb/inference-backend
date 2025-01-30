@@ -33,10 +33,10 @@ def send_inference_image(
     clientKey: str,
     imageKey: str
 ):
-    nest_url = f"{settings.trainer_node_service_url}/trainers/{trainerId}/images/inference"
+    nest_url = f"{settings.trainer_node_service_url}/inference"
 
     data = {
-        "trainerId": str(trainerId),
+        "trainerId": trainerId,
         "modelKey": modelKey,
         "predictedCategoryName": prediction,
         "clientKey": clientKey,
